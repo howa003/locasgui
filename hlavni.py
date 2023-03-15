@@ -1,13 +1,13 @@
+# importing the eel library  
 import eel
 
-eel.init('static_web_folder')
+# initializing the application
+eel.init("static_web_folder")
 
-def print_num(n):
-    print('Got this from Javascript:', n)
+@eel.expose
+def give_result(a, b):
+    eel.print_status(18)()
+    return (b)
 
-
-
-eel.start('index.html', size=(400, 300), block=False)
-
-n = eel.js_random()()  # This immediately returns the value
-print('Got this from Javascript:', n)
+# starting the application
+eel.start("index.html")

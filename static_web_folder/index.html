@@ -1,14 +1,38 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title>Hello, World!</title>
+    <head>
+        <title>
+            Sum Application
+        </title>
+        <script type = "text/javascript" src = "code.js"></script>
+        <script type = "text/javascript" src = "/eel.js"></script>
+        <script type = "text/javascript">
+            function print_result(output){
+                document.getElementById("res").value = output
+            }
 
-    <!-- Include eel.js - note this file doesn't exist in the 'web' directory -->
-    <script type="text/javascript" src="/eel.js"></script>
-    <script type="text/javascript" src="code.js"></script>
-  </head>
+            function run_python(){
+            var data_1 = document.getElementById("int1").value
+            var data_2 = document.getElementById("int2").value
+            eel.give_result(data_1,data_2)(print_result)
+            }
 
-  <body>
-    Hello, World!
-  </body>
+            eel.expose(print_status);
+            function print_status(number) {
+                document.getElementById("int1").value = number
+            }
+        </script>
+    </head>
+    <body>
+        <label>Enter First Number
+        <textarea id = "int1"></textarea>
+        <label>Enter Second Number
+        <textarea id = "int2"></textarea>
+        <label>Result
+        <textarea id = "res"></textarea>
+
+        <button type = "button" id = "add" onclick = "run_python()">
+            Sum
+        </button>
+
+    </body>
 </html>
