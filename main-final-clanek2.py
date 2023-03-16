@@ -1378,7 +1378,7 @@ def hlavni_vypocet():
 
         if (i % (int(steps/100)*printPercent) == 0):
             print('[Temperature] Time: '+str(int(time/6)/10)+' minutes ('+str(int(100*i/steps))+' %)')
-            eel.print_status((int(1000*i/steps)))()
+            eel.print_status('[Temperature] Time: '+str(int(time/6)/10)+' minutes ('+str(int(100*i/steps))+' %)')()
         ftrAirTemp = airTemp(time)      # teplota požáru v budoucím časovém kroku i+1
         airTempVect[i+1] = ftrAirTemp
         airPressVect[i+1] = prssSftCoeff*fnctAirTlak(time)
@@ -2472,9 +2472,9 @@ eel.init("static_web_folder")
 
 @eel.expose
 def give_result(a, b):
-    eel.print_status(999)()
+    eel.print_status('Vypocet spusten.')()
     hlavni_vypocet()
     return (b)
 
 # starting the application
-eel.start("index.html")
+eel.start("index.html", size=(1270, 800))
