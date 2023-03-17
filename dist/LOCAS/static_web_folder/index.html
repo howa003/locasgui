@@ -1,0 +1,264 @@
+<html>
+<head>
+    <title>
+        Sum Application
+    </title>
+    <script type="text/javascript" src="code.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+            function print_result(output){
+                document.getElementById("id_Te").value = output
+            }
+
+            function run_python(){
+            var data_1 = document.getElementById("id_Tstavba").value
+            var data_2 = document.getElementById("id_Ti0").value
+            eel.give_result(data_1,data_2)(print_result)
+            }
+
+            eel.expose(print_status);
+            function print_status(number) {
+                document.getElementById("stav_vypoctu").value = number
+            }
+
+    </script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div style="height: auto; padding:15px 20px; font-size:15px; line-height:25px; border-radius:10px; text-align:left; background:#EBEBEB">
+        <div style="width: 100%; overflow: hidden;">
+            <form class="form-horizontal" id="id-drevo-inputs" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken"
+                       value="DOex7JoMDMIyUUg5BKQUoXgw2xNPVZfKQeX2TFX8foxxRizbLZkykuicHiyrcbxC">
+                <div>
+                    <div class="form-row">
+                        <div class="col-6">
+                            <div id="div_id_Tstavba" class="form-group row">
+                                <label for="id_Tstavba" class="col-lg-9 requiredField">
+                                    Teplota při stavbě (před uvedením do provozu) [°C]:</label>
+                                <div class="col-lg-3"><input type="number" name="Tstavba" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_Tstavba" value="20">
+                                </div>
+                            </div>
+                            <div id="div_id_Ti0" class="form-group row">
+                                <label for="id_Ti0" class="col-lg-9 requiredField">
+                                    Teplota v interiéru před LOCA [°C]:</label>
+                                <div class="col-lg-3"><input type="number" name="Ti0" step="any"
+                                                             class="numberinput form-control" required="" id="id_Ti0" value="41">
+                                </div>
+                            </div>
+                            <div id="div_id_Te" class="form-group row">
+                                <label for="id_Te" class="col-lg-9 requiredField">
+                                    Teplota v exteriéru před LOCA [°C]:</label>
+                                <div class="col-lg-3"><input type="number" name="Te" step="any"
+                                                             class="numberinput form-control" required="" id="id_Te" value="20">
+                                </div>
+                            </div>
+                            <div id="div_id_duration" class="form-group row">
+                                <label for="id_duration" class="col-lg-9 requiredField">
+                                    Doba trvání LOCA [s]:</label>
+                                <div class="col-lg-3"><input type="number" name="duration" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_duration" value="604800">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="id_souciniteltlaku" class="col-lg-9 requiredField">
+                                    Zvětšující součnitel přetlaku [-]:</label>
+                                <div class="col-lg-3"><input type="number" name="souciniteltlaku" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_souciniteltlaku" value="1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5">
+                            <div id="div_id_concrThick" class="form-group row">
+                                <label for="id_concrThick" class="col-lg-9 requiredField">
+                                    Tloušťka betonu [m]:</label>
+                                <div class="col-lg-3"><input type="number" name="concrThick" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_concrThick" value="1.5">
+                                </div>
+                            </div>
+                            <div id="div_id_steelThick" class="form-group row">
+                                <label for="id_steelThick" class="col-lg-9 requiredField">
+                                    Tloušťka vnitřní ocelové vystýlky [m]:</label>
+                                <div class="col-lg-3"><input type="number" name="steelThick" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_steelThick" value="0.008">
+                                </div>
+                            </div>
+                            <div id="div_id_polomerVnitrni" class="form-group row">
+                                <label for="id_polomerVnitrni" class="col-lg-9 requiredField">
+                                    Vnitřní poloměr válce [m]:</label>
+                                <div class="col-lg-3"><input type="number" name="polomerVnitrni" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_polomerVnitrni" value="9.5">
+                                </div>
+                            </div>
+                            <div id="div_id_sigmaP0" class="form-group row">
+                                <label for="id_sigmaP0" class="col-lg-9 requiredField">
+                                    Napětí v předpínací výztuži [MPa]:</label>
+                                <div class="col-lg-3"><input type="number" name="sigmaP0" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_sigmaP0" value="1280">
+                                </div>
+                            </div>
+                            <div id="div_id_plochaPredp" class="form-group row">
+                                <label for="id_plochaPredp" class="col-lg-9 requiredField">
+                                    Plocha výztuže na 1 metr výšky stěny [m2]:</label>
+                                <div class="col-lg-3"><input type="number" name="plochaPredp" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_plochaPredp" value="0.01425">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prazdny20"></div>
+
+                <div>
+                    <div class="form-row">
+                        <div class="col-6">
+                            <div id="div_id_density0" class="form-group row">
+                                <label for="id_density0" class="col-lg-9 requiredField">
+                                    Objemová hmotnost betonu [kg/m3]:</label>
+                                <div class="col-lg-3"><input type="number" name="density0" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_density0" value="2500">
+                                </div>
+                            </div>
+                            <div id="div_id_waterCont" class="form-group row">
+                                <label for="id_waterCont" class="col-lg-9 requiredField">
+                                    Obsah vody v betonu [hm. %]:</label>
+                                <div class="col-lg-3"><input type="number" name="waterCont" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_waterCont" value="1.5">
+                                </div>
+                            </div>
+                            <div id="div_id_thermExpan" class="form-group row">
+                                <label for="id_thermExpan" class="col-lg-9 requiredField">
+                                    Tepelná roztažnost betonu a oceli [1/K]:</label>
+                                <div class="col-lg-3"><input type="number" name="thermExpan" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_thermExpan" value="0.000012">
+                                </div>
+                            </div>
+                            <div id="div_id_modulusConc" class="form-group row">
+                                <label for="id_modulusConc" class="col-lg-9 requiredField">
+                                    Modul pružnosti betonu [MPa]:</label>
+                                <div class="col-lg-3"><input type="number" name="modulusConc" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_modulusConc" value="30000">
+                                </div>
+                            </div>
+                            <div id="div_id_modulusSteel" class="form-group row">
+                                <label for="id_modulusSteel" class="col-lg-9 requiredField">
+                                    Modul pružnosti oceli [MPa]:</label>
+                                <div class="col-lg-3"><input type="number" name="modulusSteel" step="any"
+                                                             class="numberinput form-control" required=""
+                                                             id="id_modulusSteel" value="210000">
+                                </div>
+                            </div>
+                            <div id="div_id_emiss" class="form-group row">
+                                <label for="id_emiss" class="col-lg-9 requiredField">
+                                    Emisivita betonu a oceli<span class="asteriskField">*</span> </label>
+                                <div class="col-lg-3"><input type="number" name="emiss" step="any"
+                                                             class="numberinput form-control" required="" id="id_emiss" value="0.7">
+                                </div>
+                            </div>
+                            <div id="div_id_Lair" class="form-group row">
+                                <label for="id_Lair" class="col-lg-9 requiredField">
+                                    Charakteristická délka, na které dochází k výměně tepla:</label>
+                                <div class="col-lg-3"><input type="number" name="Lair" step="any"
+                                                             class="numberinput form-control" required="" id="id_Lair" value="0.05">
+                                </div>
+                            </div>
+                            <div id="div_id_pe" class="form-group row">
+                                <label for="id_pe" class="col-lg-9 requiredField">
+                                    Tlak vzduchu vně válce [MPa]:</label>
+                                <div class="col-lg-3"><input type="number" name="pe" step="any"
+                                                             class="numberinput form-control" required="" id="id_pe" value="0.1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                        </div>
+                        <div class="col-5">
+                            <div id="div_id_Le" class="form-group row">
+                                <label for="id_Le" class="col-lg-9 requiredField">
+                                    Délka konečných prvků [m]:</label>
+                                <div class="col-lg-3"><input type="number" name="Le" step="any"
+                                                             class="numberinput form-control" required="" id="id_Le" value="0.001">
+                                </div>
+                            </div>
+                            <div id="div_id_dt1" class="form-group row">
+                                <label for="id_dt1" class="col-lg-9 requiredField">
+                                    Časové kroky do 5 minut [s]:</label>
+                                <div class="col-lg-3"><input type="number" name="dt1" step="any"
+                                                             class="numberinput form-control" required="" id="id_dt1" value="1">
+                                </div>
+                            </div>
+                            <div id="div_id_dt2" class="form-group row">
+                                <label for="id_dt2" class="col-lg-9 requiredField">
+                                    Časové kroky do 30 minut [s]:</label>
+                                <div class="col-lg-3"><input type="number" name="dt2" step="any"
+                                                             class="numberinput form-control" required="" id="id_dt2" value="15">
+                                </div>
+                            </div>
+                            <div id="div_id_dt3" class="form-group row">
+                                <label for="id_dt3" class="col-lg-9 requiredField">
+                                    Časové kroky do 1 hodiny [s]:</label>
+                                <div class="col-lg-3"><input type="number" name="dt3" step="any"
+                                                             class="numberinput form-control" required="" id="id_dt3" value="60">
+                                </div>
+                            </div>
+                            <div id="div_id_dt4" class="form-group row">
+                                <label for="id_dt4" class="col-lg-9 requiredField">
+                                    Časové kroky do 24 hodin [s]:</label>
+                                <div class="col-lg-3"><input type="number" name="dt4" step="any"
+                                                             class="numberinput form-control" required="" id="id_dt4" value="300">
+                                </div>
+                            </div>
+                            <div id="div_id_dt5" class="form-group row">
+                                <label for="id_dt5" class="col-lg-9 requiredField">
+                                    Časové kroky po 24 hodinách [s]:</label>
+                                <div class="col-lg-3"><input type="number" name="dt5" step="any"
+                                                             class="numberinput form-control" required="" id="id_dt5" value="1800">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prazdny20"></div>
+
+                <div class="form-row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <input type="button" value="Vypočítej" class="btn btn-primary btn-block" id="add" onclick="run_python()">
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+
+                <div class="prazdny5"></div>
+
+                <div class="form-row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <input type="text" name="stav_vypoctu" class="form-control" id="stav_vypoctu">
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
