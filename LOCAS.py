@@ -8,6 +8,8 @@ from pandas import read_excel, DataFrame
 from pathlib import Path
 from scipy import interpolate
 
+import os.path
+
 plt.rcParams.update({'figure.max_open_warning': 0})
 
 def hlavni_vypocet():
@@ -1286,6 +1288,9 @@ def hlavni_vypocet():
 
     # Funkce popisující teplotu uvnitř obálky
     nazevSouboru = 'ujvAirTepl'+str(Ti0)+'C.xlsx'       # Název souboru
+    if not os.path.isfile(nazevSouboru):
+        print('ERROR: File temperature.xlsx is missing in the folder.')
+        return None
     excelData = read_excel(nazevSouboru,header=None)    # Načtení souboru
     vectCas = excelData.iloc[:,0].to_numpy()            # Vytvoření vektoru hodnot osy x (čas)
     vectHodn = excelData.iloc[:,1].to_numpy()           # Vytvoření vektoru hodnot osy y (čas)
@@ -1293,6 +1298,9 @@ def hlavni_vypocet():
 
     # Funkce popisující tlak uvnitř obálky
     nazevSouboru = 'ujvAirTlak'+str(Ti0)+'C.xlsx'       # Název souboru
+    if not os.path.isfile(nazevSouboru):
+        print('ERROR: File pressure.xlsx is missing in the folder.')
+        return None
     excelData = read_excel(nazevSouboru,header=None)    # Načtení souboru
     vectCas = excelData.iloc[:,0].to_numpy()            # Vytvoření vektoru hodnot osy x (čas)
     vectHodn = excelData.iloc[:,1].to_numpy()           # Vytvoření vektoru hodnot osy y (čas)
@@ -1414,9 +1422,10 @@ def hlavni_vypocet():
         #     tVec999mm[i+1] = Tnts[1499]
         #     tVecGrad[i+1] = Tnts[1]-Tnts[1499]
     print('===== Temperature ended. =====')
+    eel.print_status('===== Temperature ended. =====')()
 
 
-
+    eel.print_status('===== Stress started. =====')()
     print('===== Stress started. =====')
     matrixStrnF = zeros((steps+1, nNode))
     matrixStrnR = zeros((steps+1, nNode))
@@ -2154,6 +2163,8 @@ def hlavni_vypocet():
 
 
     # Plot gif - časová evoluce (gif) průběhů teplot ve stěně (frame)
+    eel.print_status('GIF plot started')()
+
     gifSavePath = 'gifSavePath/'+lblTemp+'C_'+lblTime+'_v'+lblVersion
     Path(gifSavePath).mkdir(parents=True, exist_ok=True)
 
@@ -2162,6 +2173,7 @@ def hlavni_vypocet():
         frameTime = xAxisTime[i]
         if (i % (int(steps/100)*printPercent) == 0):
             print('Plot status: '+str(int(frameTime/6)/10)+' min ('+str(int(100*i/steps))+' %).')
+            eel.print_status('Plot status: '+str(int(frameTime/6)/10)+' min ('+str(int(100*i/steps))+' %).')()
         # if ((frameTime <= 180) or ((frameTime <= 1800) and ((frameTime % 30) == 0)) or ((frameTime <= 7200) and ((frameTime % 60) == 0)) or ((frameTime <= 172800) and ((frameTime % 300) == 0)) or ((frameTime % 1800) == 0)):
         if (True):
             vectT = matrixT[i]                      # Vektor rozložení teploty v daném čase
@@ -2183,283 +2195,11 @@ def hlavni_vypocet():
 
 
     print('===== Plot ended. =====')
+    eel.print_status('COMPLETED')()
 
 
 
 
-
-
-
-    #################### TRASH ####################
-
-
-    # print('===== All stresses started. =====')
-    # matrixStrnR = matrixStrnR + matrixStrnOvrprss
-    # matrixStrnD = matrixStrnD + matrixStrnOvrprss
-    # matrixStrssF = matrixStrssF + matrixStrssOvrprss
-    # matrixStrss = matrixStrss + matrixStrssOvrprss
-    # matrixStrssD = matrixStrssD + matrixStrssOvrprss
-    # print('===== All stresses ended. =====')
-
-
-    # print('===== Vnitrni sily started. =====')
-    # vectNormalFxE = zeros(steps+1)
-    # vectBendingFxE = zeros(steps+1)
-    # vectNormalFrD = zeros(steps+1)
-    # vectBendingFrD = zeros(steps+1)
-    # vectNormalFrE = zeros(steps+1)
-    # vectBendingFrE = zeros(steps+1)
-
-    # vectNormalConcrFxE = zeros(steps+1)
-    # vectBendingConcrFxE = zeros(steps+1)
-    # vectNormalConcrFrD = zeros(steps+1)
-    # vectBendingConcrFrD = zeros(steps+1)
-    # vectNormalConcrFrE = zeros(steps+1)
-    # vectBendingConcrFrE = zeros(steps+1)
-
-    # vectNormalSteelFxE = zeros(steps+1)
-    # vectBendingSteelFxE = zeros(steps+1)
-    # vectNormalSteelFrD = zeros(steps+1)
-    # vectBendingSteelFrD = zeros(steps+1)
-    # vectNormalSteelFrE = zeros(steps+1)
-    # vectBendingSteelFrE = zeros(steps+1)
-
-    # for i in range(steps+1):
-    #     normalFxE = 0 # MN
-    #     bendingFxE = 0 # MNm
-    #     normalFrD = 0 # MN
-    #     bendingFrD = 0 # MNm
-    #     normalFrE = 0 # MN
-    #     bendingFrE = 0 # MNm
-
-    #     normalSteelFxE = 0 # MN
-    #     bendingSteelFxE = 0 # MNm
-    #     normalSteelFrD = 0 # MN
-    #     bendingSteelFrD = 0 # MNm
-    #     normalSteelFrE = 0 # MN
-    #     bendingSteelFrE = 0 # MNm
-
-    #     normalConcrFxE = 0 # MN
-    #     bendingConcrFxE = 0 # MNm
-    #     normalConcrFrD = 0 # MN
-    #     bendingConcrFrD = 0 # MNm
-    #     normalConcrFrE = 0 # MN
-    #     bendingConcrFrE = 0 # MNm
-
-    #     fixedStresses = matrixStrssF[i]
-    #     realStressDispl = matrixStrssD[i]
-    #     realStress = matrixStrss[i]
-
-    #     for j in elemRange:
-    #         stressFxE = (fixedStresses[j]+fixedStresses[j+1])/2 # Pro Fixed-end
-    #         force = stressFxE*Le*beznyMetr
-    #         normalFxE = normalFxE + force
-    #         bendingFxE = bendingFxE + force*(center-elemCenters[j])
-    #         if j <= ((steelThick/Le)):
-    #             normalSteelFxE = normalSteelFxE + force
-    #             bendingSteelFxE = bendingSteelFxE + force*(center-elemCenters[j])
-    #         elif j >= ((length-steelThickOut)/Le):
-    #             normalSteelFxE = normalSteelFxE + force
-    #             bendingSteelFxE = bendingSteelFxE + force*(center-elemCenters[j])
-    #         else:
-    #             normalConcrFxE = normalConcrFxE + force
-    #             bendingConcrFxE = bendingConcrFxE + force*(center-elemCenters[j])
-
-    #         stressFrD = (realStressDispl[j]+realStressDispl[j+1])/2 # Pro Fixed-displacement
-    #         force = stressFrD*Le*beznyMetr
-    #         normalFrD = normalFrD + force
-    #         bendingFrD = bendingFrD + force*(center-elemCenters[j])
-    #         if j <= ((steelThick/Le)):
-    #             normalSteelFrD = normalSteelFrD + force
-    #             bendingSteelFrD = bendingSteelFrD + force*(center-elemCenters[j])
-    #         elif j >= ((length-steelThickOut)/Le):
-    #             normalSteelFrD = normalSteelFrD + force
-    #             bendingSteelFrD = bendingSteelFrD + force*(center-elemCenters[j])
-    #         else:
-    #             normalConcrFrD = normalConcrFrD + force
-    #             bendingConcrFrD = bendingConcrFrD + force*(center-elemCenters[j])
-
-    #         stressFrE = (realStress[j]+realStress[j+1])/2 # Pro Free-end
-    #         force = stressFrE*Le*beznyMetr
-    #         normalFrE = normalFrE + force
-    #         bendingFrE = bendingFrE + force*(center-elemCenters[j])
-    #         if j <= ((steelThick/Le)):
-    #             normalSteelFrE = normalSteelFrE + force
-    #             bendingSteelFrE = bendingSteelFrE + force*(center-elemCenters[j])
-    #         elif j >= ((length-steelThickOut)/Le):
-    #             normalSteelFrE = normalSteelFrE + force
-    #             bendingSteelFrE = bendingSteelFrE + force*(center-elemCenters[j])
-    #         else:
-    #             normalConcrFrE = normalConcrFrE + force
-    #             bendingConcrFrE = bendingConcrFrE + force*(center-elemCenters[j])
-
-
-    #     vectNormalFxE[i] = normalFxE
-    #     vectBendingFxE[i] = bendingFxE
-    #     vectNormalFrD[i] = normalFrD
-    #     vectBendingFrD[i] = bendingFrD
-    #     vectNormalFrE[i] = normalFrE
-    #     vectBendingFrE[i] = bendingFrE
-
-    #     vectNormalSteelFxE[i] = normalSteelFxE
-    #     vectBendingSteelFxE[i] = bendingSteelFxE
-    #     vectNormalSteelFrD[i] = normalSteelFrD
-    #     vectBendingSteelFrD[i] = bendingSteelFrD
-    #     vectNormalSteelFrE[i] = normalSteelFrE
-    #     vectBendingSteelFrE[i] = bendingSteelFrE
-
-    #     vectNormalConcrFxE[i] = normalConcrFxE
-    #     vectBendingConcrFxE[i] = bendingConcrFxE
-    #     vectNormalConcrFrD[i] = normalConcrFrD
-    #     vectBendingConcrFrD[i] = bendingConcrFrD
-    #     vectNormalConcrFrE[i] = normalConcrFrE
-    #     vectBendingConcrFrE[i] = bendingConcrFrE
-    # print('===== Vnitrni sily ended. =====')
-
-
-
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/normalFxE.csv', vectNormalFxE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/normalFrD.csv', vectNormalFrD, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/normalFrE.csv', vectNormalFrE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/bendingFxE.csv', vectBendingFxE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/bendingFrD.csv', vectBendingFrD, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/bendingFrE.csv', vectBendingFrE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/normalSteelFxE.csv', vectNormalSteelFxE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/normalSteelFrD.csv', vectNormalSteelFrD, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/normalSteelFrE.csv', vectNormalSteelFrE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/bendingSteelFxE.csv', vectBendingSteelFxE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/bendingSteelFrD.csv', vectBendingSteelFrD, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/bendingSteelFrE.csv', vectBendingSteelFrE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/normalConcrFxE.csv', vectNormalConcrFxE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/normalConcrFrD.csv', vectNormalConcrFrD, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/normalConcrFrE.csv', vectNormalConcrFrE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/bendingConcrFxE.csv', vectBendingConcrFxE, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/bendingConcrFrD.csv', vectBendingConcrFrD, delimiter=",")
-    # savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/bendingConcrFrE.csv', vectBendingConcrFrE, delimiter=",")
-
-
-
-
-    # # Plot Normal
-    # plotNormalTime(xAxisTimeMax,vectNormalFxE*1000,vectNormalSteelFxE*1000,vectNormalConcrFxE*1000,'FxE','fixed-end')
-    # plotNormalTime(xAxisTimeMax,vectNormalFrD*1000,vectNormalSteelFrD*1000,vectNormalConcrFrD*1000,'FrD','free-displacement')
-    # plotNormalTime(xAxisTimeMax,vectNormalFrE*1000,vectNormalSteelFrE*1000,vectNormalConcrFrE*1000,'FrE','free-end')
-    # plotNormalTime(int(36*60*60),vectNormalFxE*1000,vectNormalSteelFxE*1000,vectNormalConcrFxE*1000,'FxE','fixed-end')
-    # plotNormalTime(int(60*60),vectNormalFrD*1000,vectNormalSteelFrD*1000,vectNormalConcrFrD*1000,'FrD','free-displacement')
-    # plotNormalTime(int(60*60),vectNormalFrE*1000,vectNormalSteelFrE*1000,vectNormalConcrFrE*1000,'FrE','free-end')
-
-    # # Plot Bending
-    # plotBendingTime(xAxisTimeMax,vectBendingFxE*1000,vectBendingSteelFxE*1000,vectBendingConcrFxE*1000,'FxE','fixed-end')
-    # plotBendingTime(xAxisTimeMax,vectBendingFrD*1000,vectBendingSteelFrD*1000,vectBendingConcrFrD*1000,'FrD','free-displacement')
-    # plotBendingTime(xAxisTimeMax,vectBendingFrE*1000,vectBendingSteelFrE*1000,vectBendingConcrFrE*1000,'FrE','free-end')
-    # plotBendingTime(int(60*60),vectBendingFxE*1000,vectBendingSteelFxE*1000,vectBendingConcrFxE*1000,'FxE','fixed-end')
-    # plotBendingTime(int(36*60*60),vectBendingFrD*1000,vectBendingSteelFrD*1000,vectBendingConcrFrD*1000,'FrD','free-displacement')
-    # plotBendingTime(int(60*60),vectBendingFrE*1000,vectBendingSteelFrE*1000,vectBendingConcrFrE*1000,'FrE','free-end')
-
-
-
-
-
-
-    # # Plot průběhu normálové síly v čase
-    # def plotNormalTime(xLimit,y1,ySteel,yConcr,yType,yLbl):
-    #     plt.figure(figsize=(15,6), dpi=300)
-    #     if (xLimit <= 600):
-    #         timeRedCoef = 1
-    #         xAxisLbl = 'Time [s]'
-    #     else:
-    #         timeRedCoef = 60
-    #         xAxisLbl = 'Time [min]'
-    #     xAxisPlot = xAxisTime/timeRedCoef
-    #     xAxisMax = xLimit/timeRedCoef
-    #     figLbl = 'Evolution of the normal force in the cross-section for '+yLbl
-
-    #     print('Plotting: ' + figLbl)
-    #     plt.suptitle(figLbl, fontsize=16)
-
-    #     yAxisMin = int(min(min(y1),min(ySteel),min(yConcr))-1)
-    #     yAxisMax = int(max(max(y1),max(ySteel),max(yConcr))+1)
-    #     plt.axhline(y=0, color='k')
-    #     plt.axvline(x=0, color='k')
-    #     plt.grid()
-    #     plt.plot(xAxisPlot, y1, linestyle='solid', color=[1, 0, 1], label = 'Normal force total: <' + numToStr1dec(amin(y1)) + ',' + numToStr1dec(amax(y1)) + '> kN')
-    #     plt.plot(xAxisPlot, ySteel, linestyle='dashed', color=[1, 0, 0], label = 'Normal force in steel: <' + numToStr1dec(amin(ySteel)) + ',' + numToStr1dec(amax(ySteel)) + '> kN')
-    #     plt.plot(xAxisPlot, yConcr, linestyle='dashed', color=[0, 0, 1], label = 'Normal force in concrete: <' + numToStr1dec(amin(yConcr)) + ',' + numToStr1dec(amax(yConcr)) + '> kN')
-    #     plt.ylabel('Normal force [kN]')
-    #     plt.xlabel(xAxisLbl)
-    #     plt.xlim((0, xAxisMax))
-    #     if (abs(yAxisMax)>abs(yAxisMin)):
-    #         plt.ylim((yAxisMin, yAxisMax))
-    #     else:
-    #         plt.ylim((yAxisMax, yAxisMin))
-    #     plt.legend(loc='upper right')
-
-    #     plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'normal'+yType+'_xLim'+str(xLimit)+'.png')
-
-    # # Plot průběhu ohybového momentu v čase
-    # def plotBendingTime(xLimit,y1,ySteel,yConcr,yType,yLbl):
-    #     plt.figure(figsize=(15,6), dpi=300)
-    #     if (xLimit <= 600):
-    #         timeRedCoef = 1
-    #         xAxisLbl = 'Time [s]'
-    #     else:
-    #         timeRedCoef = 60
-    #         xAxisLbl = 'Time [min]'
-    #     xAxisPlot = xAxisTime/timeRedCoef
-    #     xAxisMax = xLimit/timeRedCoef
-    #     figLbl = 'Evolution of the bending moment in the cross-section for '+yLbl
-
-    #     print('Plotting: ' + figLbl)
-    #     plt.suptitle(figLbl, fontsize=16)
-
-    #     yAxisMin = int(min(min(y1),min(ySteel),min(yConcr))-1)
-    #     yAxisMax = int(max(max(y1),max(ySteel),max(yConcr))+1)
-    #     plt.axhline(y=0, color='k')
-    #     plt.axvline(x=0, color='k')
-    #     plt.grid()
-    #     plt.plot(xAxisPlot, y1, linestyle='solid', color=[1, 0, 1], label = 'Bending moment total: <' + numToStr1dec(amin(y1)) + ',' + numToStr1dec(amax(y1)) + '> kNm')
-    #     plt.plot(xAxisPlot, ySteel, linestyle='dashed', color=[1, 0, 0], label = 'Bending moment from steel: <' + numToStr1dec(amin(ySteel)) + ',' + numToStr1dec(amax(ySteel)) + '> kNm')
-    #     plt.plot(xAxisPlot, yConcr, linestyle='dashed', color=[0, 0, 1], label = 'Bending moment from concrete: <' + numToStr1dec(amin(yConcr)) + ',' + numToStr1dec(amax(yConcr)) + '> kNm')
-    #     plt.ylabel('Bending moment [kNm]')
-    #     plt.xlabel(xAxisLbl)
-    #     plt.xlim((0, xAxisMax))
-    #     if (abs(yAxisMax)>abs(yAxisMin)):
-    #         plt.ylim((yAxisMin, yAxisMax))
-    #     else:
-    #         plt.ylim((yAxisMax, yAxisMin))
-    #     plt.legend(loc='upper right')
-
-    #     plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'bending'+yType+'_xLim'+str(xLimit)+'.png')
-
-
-
-
-    # # plotNormalTime(xAxisTimeMax,vectNormalFxE*1000,'FxE')
-    # # plotNormalTime(xAxisTimeMax,vectNormalFrD*1000,'FrD')
-    # # plotNormalTime(xAxisTimeMax,vectNormalFrE*1000,'FrE')
-
-    # # # Plot Bending
-    # # plotBendingTime(xAxisTimeMax,vectBendingFxE*1000,'FxE')
-    # # plotBendingTime(xAxisTimeMax,vectBendingFrD*1000,'FrD')
-    # # plotBendingTime(xAxisTimeMax,vectBendingFrE*1000,'FrE')
-
-
-
-
-
-
-
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/inputs.npy', inputs)
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/xAxisTime.npy', xAxisTime)
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/airTempVect.npy', airTempVect)
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/airPressVect.npy', airPressVect)
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/matrixT.npy', matrixT)
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/strnFxE.npy', matrixStrnF)
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/strnFrE.npy', matrixStrnR)
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/strnFrD.npy', matrixStrnD)
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/strssFxE.npy', matrixStrssF)
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/strssFrE.npy', matrixStrss)
-    # save('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/strssFrD.npy', matrixStrssD)
 
 
 

@@ -1,30 +1,59 @@
 <html>
 <head>
     <title>
-        Sum Application
+        LocaS — Loss-of-coolant-accident Stresses
     </title>
+    <link rel="icon" type="image/png" href="http://jakubholan.cz/static/images/favicon.png">
     <script type="text/javascript" src="code.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
-            function print_result(output){
-                document.getElementById("id_Te").value = output
+            function print_result(string_value){
+                document.getElementById("id_stav_vypoctu").value = string_value
             }
 
             function run_python(){
-            var data_1 = document.getElementById("id_Tstavba").value
-            var data_2 = document.getElementById("id_Ti0").value
-            eel.give_result(data_1,data_2)(print_result)
+                var Tstavba = parseFloat(document.getElementById("id_Tstavba").value)
+                var Ti0 = parseFloat(document.getElementById("id_Ti0").value)
+                var Te = parseFloat(document.getElementById("id_Te").value)
+                var duration = parseInt(document.getElementById("id_duration").value)
+
+                var concrThick = parseFloat(document.getElementById("id_concrThick").value)
+                var steelThick = parseFloat(document.getElementById("id_steelThick").value)
+                var polomerVnitrni = parseFloat(document.getElementById("id_polomerVnitrni").value)
+                var sigmaP0 = parseFloat(document.getElementById("id_sigmaP0").value)
+                var plochaPredp = parseFloat(document.getElementById("id_plochaPredp").value)
+
+                var density0 = parseFloat(document.getElementById("id_density0").value)
+                var waterCont = parseFloat(document.getElementById("id_waterCont").value)
+                var thermExpan = parseFloat(document.getElementById("id_thermExpan").value)
+                var modulusConc = parseFloat(document.getElementById("id_modulusConc").value)
+                var modulusSteel = parseFloat(document.getElementById("id_modulusSteel").value)
+                var emiss = parseFloat(document.getElementById("id_emiss").value)
+                var Lair = parseFloat(document.getElementById("id_Lair").value)
+                var pe = parseFloat(document.getElementById("id_pe").value)
+
+                var Le = parseFloat(document.getElementById("id_Le").value)
+                var dt1 = parseFloat(document.getElementById("id_dt1").value)
+                var dt2 = parseFloat(document.getElementById("id_dt2").value)
+                var dt3 = parseFloat(document.getElementById("id_dt3").value)
+                var dt4 = parseFloat(document.getElementById("id_dt4").value)
+                var dt5 = parseFloat(document.getElementById("id_dt5").value)
+
+                eel.get_python_result(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVnitrni, sigmaP0, plochaPredp, density0, waterCont, thermExpan, modulusConc, modulusSteel, emiss, Lair, pe, Le, dt1, dt2, dt3, dt4, dt5)(print_result)
             }
 
             eel.expose(print_status);
-            function print_status(number) {
-                document.getElementById("stav_vypoctu").value = number
+            function print_status(string_value) {
+                document.getElementById("id_stav_vypoctu").value = string_value
             }
 
     </script>
     <link rel="stylesheet" href="bootstrap.min.css">
 </head>
 <body>
+<div class="zahlavi">
+    <span style="font-weight: bolder">LocaS</span> — <i>Loss-of-coolant-accident Stresses</i>
+</div>
 <div class="container">
     <div style="height: auto; padding:15px 20px; font-size:15px; line-height:25px; border-radius:10px; text-align:left; background:#EBEBEB">
         <div style="width: 100%; overflow: hidden;">
@@ -251,7 +280,7 @@
                 <div class="form-row">
                     <div class="col-4"></div>
                     <div class="col-4">
-                        <input type="text" name="stav_vypoctu" class="form-control" id="stav_vypoctu">
+                        <input type="text" name="stav_vypoctu" class="form-control" id="id_stav_vypoctu">
                     </div>
                     <div class="col-4"></div>
                 </div>
