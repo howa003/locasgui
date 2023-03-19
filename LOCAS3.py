@@ -1598,6 +1598,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
 
     dataSavePath = 'savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion
     Path(dataSavePath).mkdir(parents=True, exist_ok=True)
+    eel.print_status('Progress: Folder '+dataSavePath+' was created.')()
     savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/inputs.csv', inputs, delimiter=";")
     savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/xAxisTime.csv', xAxisTime, delimiter=";")
     savetxt('savedData/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/airTempVect.csv', airTempVect, delimiter=";")
@@ -1722,6 +1723,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     eel.print_status('Progress: Plotting of figures started.')()
     plotSavePath = 'figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion
     Path(plotSavePath).mkdir(parents=True, exist_ok=True)
+    eel.print_status('Progress: Folder ' + plotSavePath + ' was created.')()
 
     # Plot graf časový vývoj teploty ve vnitřní atmosféře
     plotLOCA(xAxisTimeMax)
@@ -1975,5 +1977,5 @@ def get_python_result(Tstavba, Ti0, Te, duration, concrThick, steelThick, polome
     return (calc_info)
 
 # starting the application
-eel.start("index.html", size=(1290, 900))
+eel.start("index.html", size=(1280, 850))
 

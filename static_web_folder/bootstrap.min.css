@@ -18,20 +18,21 @@ font-size:0.8rem;
 .container{
 margin: 10px 10px 10px 10px;
 padding: 10px 10px 10px 10px;
-max-width:1240px
+max-width:1230px
 }
 
 
 .prazdny20{
-padding: 20px 20px 20px 20px;
+padding: 10px 10px 10px 10px;
 }
 .prazdny5{
 padding: 5px 5px 5px 5px;
 }
 
 .zahlavi{
-background-color: lightblue;
+background-color: rgb(50,50,50);
 font-size: 25px;
+color: rgb(255,255,255);
 padding: 10px 10px 10px 10px;
 }
 
