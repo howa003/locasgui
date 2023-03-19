@@ -34,3 +34,8 @@ background-color: lightblue;
 font-size: 25px;
 padding: 10px 10px 10px 10px;
 }
+
+.my_consolas{
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    background-color: rgb(200,200,200);
+}

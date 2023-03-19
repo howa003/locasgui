@@ -7,6 +7,10 @@
     <script type="text/javascript" src="code.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
+            function js_log_post(string_value){
+                document.getElementById('id_div_log').innerHTML += string_value+'<br>';
+            }
+
             function js_print_result(string_value){
                 document.getElementById("id_stav_vypoctu").value = string_value
             }
@@ -47,6 +51,7 @@
             eel.expose(print_status);
             function print_status(string_value) {
                 document.getElementById("id_stav_vypoctu").value = string_value
+                js_log_post(string_value)
             }
 
     </script>
@@ -315,6 +320,12 @@
     <br>
     <br>
     Author: Jakub Holan, CTU in Prague, 2023.
+    <br>
+    <br>
+    Calculation log:
+    <div id="id_div_log" class="my_consolas">
+
+    </div>
 
 </div>
 </body>

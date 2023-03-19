@@ -222,7 +222,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.ylim((0, yAxisMax))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_Temp'+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_Temp'+'.png')
 
 
 
@@ -344,7 +344,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.legend(loc='lower right')
 
         # >>>>> Save figure <<<<<
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+nameLabel+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+nameLabel+'.png')
 
     # Plot časový průběh maximálních napětí v konstrukci
     def plotStrssTime(xLimit):
@@ -422,7 +422,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.yticks(arange(yAxisMin, yAxisMax, 5))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'strssMaxTime'+'_xLim'+str(xLimit)+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'strssMaxTime'+'_xLim'+str(xLimit)+'.png')
 
     # Plot časový průběh maximálních teplot v air/konstrukci
     def plotTempTime(xLimit):
@@ -459,7 +459,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.yticks(arange(0, yAxisMax, 25))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'tempMaxTime'+'_xLim'+str(xLimit)+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'tempMaxTime'+'_xLim'+str(xLimit)+'.png')
 
     # Plot časový průběh napětí od předpětí a přetlaku
     def plotNonTempTime(xLimit):
@@ -497,7 +497,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.yticks(arange(yAxisMin, yAxisMax, 1))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'nonTempTime'+'_xLim'+str(xLimit)+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'nonTempTime'+'_xLim'+str(xLimit)+'.png')
 
     # Plot časový průběh tlaku v air
     def plotLOCA(xLimit):
@@ -530,7 +530,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.yticks(arange(0, yAxisMax, 25))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'tempLOCA'+'_xLim'+str(xLimit)+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'tempLOCA'+'_xLim'+str(xLimit)+'.png')
 
     # Plot průběhu teplot ve vnitřní atmosféře
     def plotPressTime(xLimit):
@@ -563,7 +563,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.yticks(arange(0, yAxisMax, 0.25))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'pressLOCA'+'_xLim'+str(xLimit)+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'pressLOCA'+'_xLim'+str(xLimit)+'.png')
 
     # Plot průběhu napětí od předpětí v konstrukci
     def plotPresstressStress():
@@ -603,7 +603,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.ylim((yAxisMin, yAxisMax))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_PresstressStress'+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_PresstressStress'+'.png')
 
 
     def plotTempTstart():
@@ -643,7 +643,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.ylim((20, yAxisMax))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_Tstart'+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_Tstart'+'.png')
 
     def plotSoucinitele():
         plt.figure(figsize=(12,6), dpi=300)
@@ -664,7 +664,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.xlim((xAxisMin, xAxisMax))
         plt.ylim((yAxisMin, yAxisMax))
         plt.legend(loc='upper right')
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_HeatTransCoef'+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_HeatTransCoef'+'.png')
 
     # Plot časový průběh maximálních teplot v air/konstrukci
     def plotGradient(xLimit):
@@ -697,7 +697,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         plt.yticks(arange(0, yAxisMax, 5))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'Gradient'+'_xLim'+str(xLimit)+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'Gradient'+'_xLim'+str(xLimit)+'.png')
 
 
     # Plot průběhu normálové síly v čase
@@ -733,7 +733,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
             plt.ylim((yAxisMax, yAxisMin))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'normal'+yType+'_xLim'+str(xLimit)+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'normal'+yType+'_xLim'+str(xLimit)+'.png')
 
     # Plot průběhu ohybového momentu v čase
     def plotBendingTime(xLimit,y1,ySteel,yConcr,yType,yLbl):
@@ -768,7 +768,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
             plt.ylim((yAxisMax, yAxisMin))
         plt.legend(loc='upper right')
 
-        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'bending'+yType+'_xLim'+str(xLimit)+'.png')
+        plt.savefig('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'bending'+yType+'_xLim'+str(xLimit)+'.png')
 
 
     ############################ OBECNÉ FUNKCE ############################
@@ -1034,7 +1034,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
 
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>> SETTINGS <<<<<<<<<<<<<<<<<<<<<<<<<<
-    lblVersion = 'locas2gui'      # Pojmenování výstupních souborů
+    lblVersion = ''      # Pojmenování výstupních souborů
 
     provozniNapeti = 1      # Má být uvažován vznik napětí od provozních teplot? 1 (ano), 0 (ne) ... pureTemp = 0; teplotaTlakPredpeti = 1
     predpeti = 1            # Uvažovat předpětí? 1 (ano) or 0 (ne) ... pureTemp = 0; teplotaTlakPredpeti = 1
@@ -1064,10 +1064,10 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     lblType = ''
     prestressStrss = (-predpinaciNapeti*plochaPredp)/(1*length-plochaPredp) # MPa; Napětí v betonu od předpětí
 
-    lblVersion = lblVersion + '-T' + str(Tstavba)
-    lblVersion = lblVersion + '-P' + str(prssSftCoeff)
-    lblVersion = lblVersion + '-' + str(provozniNapeti) + str(predpeti) + str(pretlak)
-    lblVersion = lblVersion + '-' + str(Ti0)
+    # lblVersion = lblVersion + str(Tstavba)
+    # lblVersion = lblVersion + str(prssSftCoeff)
+    # lblVersion = lblVersion + '-' + str(provozniNapeti) + str(predpeti) + str(pretlak)
+    # lblVersion = lblVersion + '-' + str(Ti0)
 
     # Prostorová diskretizace
     nElem = int(length/Le)                      # Počet elementů
@@ -1180,7 +1180,9 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     if not os.path.isfile(nazevSouboru):
         print('ERROR: File temperature.xlsx is missing in the folder.')
         eel.print_status('ERROR: File temperature.xlsx is missing in the folder.')()
-        return None
+        return ('ERROR: File temperature.xlsx is missing in the folder.')
+    else:
+        eel.print_status('Progress: File temperature.xlsx was successfully loaded.')()
     excelData = read_excel(nazevSouboru,header=None)    # Načtení souboru
     vectCas = excelData.iloc[:,0].to_numpy()            # Vytvoření vektoru hodnot osy x (čas)
     vectHodn = excelData.iloc[:,1].to_numpy()           # Vytvoření vektoru hodnot osy y (čas)
@@ -1192,7 +1194,9 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     if not os.path.isfile(nazevSouboru):
         print('ERROR: File pressure.xlsx is missing in the folder.')
         eel.print_status('ERROR: File pressure.xlsx is missing in the folder.')()
-        return None
+        return ('ERROR: File pressure.xlsx is missing in the folder.')
+    else:
+        eel.print_status('Progress: File pressure.xlsx was successfully loaded.')()
     excelData = read_excel(nazevSouboru,header=None)    # Načtení souboru
     vectCas = excelData.iloc[:,0].to_numpy()            # Vytvoření vektoru hodnot osy x (čas)
     vectHodn = excelData.iloc[:,1].to_numpy()           # Vytvoření vektoru hodnot osy y (čas)
@@ -1897,21 +1901,21 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     fakeFrames = []
     fakeFrame = plotGifFrame(xAxisThick, matrixT[timeStep], airTempVect[timeStep], matrixStrnF[timeStep], matrixStrnR[timeStep], matrixStrnD[timeStep], matrixStrss[timeStep], matrixStrssF[timeStep], matrixStrssD[timeStep], matrixStrnOvrprss[timeStep], matrixStrnPrstrss[timeStep], xAxisTime[timeStep])
     fakeFrames.append(fakeFrame)
-    gifName = str('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'beforeLOCA'+'.gif')
+    gifName = str('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'beforeLOCA'+'.gif')
     gif.save(fakeFrames, gifName, duration=10000)
 
     timeStep = maxPressAirStep
     fakeFrames = []
     fakeFrame = plotGifFrame(xAxisThick, matrixT[timeStep], airTempVect[timeStep], matrixStrnF[timeStep], matrixStrnR[timeStep], matrixStrnD[timeStep], matrixStrss[timeStep], matrixStrssF[timeStep], matrixStrssD[timeStep], matrixStrnOvrprss[timeStep], matrixStrnPrstrss[timeStep], xAxisTime[timeStep])
     fakeFrames.append(fakeFrame)
-    gifName = str('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'maxInnerPress'+'.gif')
+    gifName = str('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'maxInnerPress'+'.gif')
     gif.save(fakeFrames, gifName, duration=10000)
 
     timeStep = maxTempAirStep
     fakeFrames = []
     fakeFrame = plotGifFrame(xAxisThick, matrixT[timeStep], airTempVect[timeStep], matrixStrnF[timeStep], matrixStrnR[timeStep], matrixStrnD[timeStep], matrixStrss[timeStep], matrixStrssF[timeStep], matrixStrssD[timeStep], matrixStrnOvrprss[timeStep], matrixStrnPrstrss[timeStep], xAxisTime[timeStep])
     fakeFrames.append(fakeFrame)
-    gifName = str('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'maxInnerTemp'+'.gif')
+    gifName = str('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'_'+'maxInnerTemp'+'.gif')
     gif.save(fakeFrames, gifName, duration=10000)
 
     print('===== Plot ended. =====')
@@ -1944,7 +1948,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
             strssD = matrixStrssD[i]  # Vektor Real stress free-displacement v daném čase
             frame = plotGifFrame(xAxisThick, vectT, airTempVal, strnT, strnR, strnD, strssSE, strssFE, strssD, vectOvrprssStrn, vectPrestrssStrn, frameTime)
             frames.append(frame)
-    gifName = str('gifs/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'.gif')
+    gifName = str('gifs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'.gif')
     # gifName = str('gifs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'.gif')
     gif.save(frames, gifName, duration=100)
 
@@ -1954,7 +1958,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
 
     eel.print_status('Progress: Python script completed.')()
 
-
+    return ('COMPLETED: Calculation has ended. See figures and data in the created folders.')
 
 
 
@@ -1967,8 +1971,8 @@ eel.init("static_web_folder") # initializing the application
 @eel.expose
 def get_python_result(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVnitrni, sigmaP0, plochaPredp, density0, waterCont, thermExpan, modulusConc, modulusSteel, emiss, Lair, pe, Le, dt1, dt2, dt3, dt4, dt5):
     eel.print_status('Progress: Python function starting.')()
-    hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVnitrni, sigmaP0, plochaPredp, density0, waterCont, thermExpan, modulusConc, modulusSteel, emiss, Lair, pe, Le, dt1, dt2, dt3, dt4, dt5)
-    return ('COMPLETED: Calculation has ended. See figures and data in the created folders.')
+    calc_info = hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVnitrni, sigmaP0, plochaPredp, density0, waterCont, thermExpan, modulusConc, modulusSteel, emiss, Lair, pe, Le, dt1, dt2, dt3, dt4, dt5)
+    return (calc_info)
 
 # starting the application
 eel.start("index.html", size=(1290, 900))
