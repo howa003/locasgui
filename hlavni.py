@@ -10,4 +10,4 @@ def give_result(a, b):
     return (b)
 
 # starting the application
-eel.start("index.html", size=(1270, 800))
+eel.start("index.html", size=(1300, 900))
