@@ -7,11 +7,13 @@
     <script type="text/javascript" src="code.js"></script>
     <script type="text/javascript" src="/eel.js"></script>
     <script type="text/javascript">
-            function print_result(string_value){
+            function js_print_result(string_value){
                 document.getElementById("id_stav_vypoctu").value = string_value
             }
 
             function run_python(){
+                js_print_result('Progress: Passing data to python script.')
+
                 var Tstavba = parseFloat(document.getElementById("id_Tstavba").value)
                 var Ti0 = parseFloat(document.getElementById("id_Ti0").value)
                 var Te = parseFloat(document.getElementById("id_Te").value)
@@ -39,7 +41,7 @@
                 var dt4 = parseFloat(document.getElementById("id_dt4").value)
                 var dt5 = parseFloat(document.getElementById("id_dt5").value)
 
-                eel.get_python_result(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVnitrni, sigmaP0, plochaPredp, density0, waterCont, thermExpan, modulusConc, modulusSteel, emiss, Lair, pe, Le, dt1, dt2, dt3, dt4, dt5)(print_result)
+                eel.get_python_result(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVnitrni, sigmaP0, plochaPredp, density0, waterCont, thermExpan, modulusConc, modulusSteel, emiss, Lair, pe, Le, dt1, dt2, dt3, dt4, dt5)(js_print_result)
             }
 
             eel.expose(print_status);
@@ -55,16 +57,6 @@
     <span style="font-weight: bolder">LocaS</span> — <i>Loss-of-coolant-accident Stresses</i>
 </div>
 <div class="container">
-    This tool can be used for a simple estimation of horizontal (hoop) stresses in a concrete cylinder wall with an inner steel liner.
-    The cylinder wall can be loaded by four loads:
-    <ul>
-        <li>operational temperatures described by internal and external temperatures,</li>
-        <li>LOCA temperatures described by an evolution of internal temperature given in the temperature.xlsx file,</li>
-        <li>LOCA pressure described by an evolution of internal pressure given in the pressure.xlsx file,</li>
-        <li>prestressing of concrete induced by steel tendons.</li>
-    </ul>
-    This tool and methods used in this tool are described in detail in a PhD thesis by Holan [1].
-    <br>
     <div style="height: auto; padding:15px 20px; font-size:15px; line-height:25px; border-radius:10px; text-align:left; background:#EBEBEB">
         <div style="width: 100%; overflow: hidden;">
             <form class="form-horizontal" id="id-drevo-inputs" method="post">
@@ -290,7 +282,7 @@
                 <div class="form-row">
                     <div class="col-4"></div>
                     <div class="col-4">
-                        <input type="text" name="stav_vypoctu" class="form-control" id="id_stav_vypoctu">
+                        <input type="text" name="stav_vypoctu" class="form-control" id="id_stav_vypoctu" value="Click on the button above.">
                     </div>
                     <div class="col-4"></div>
                 </div>
@@ -299,7 +291,31 @@
         </div>
     </div>
     <br>
+    This tool can be used for a simple estimation of horizontal (hoop) stresses in a concrete cylinder wall with an inner steel liner.
+    Based on the inputs provided in the table above and in the "temperature.xlsx" and "pressure.xlsx" files, temperatures and stresses in the cylinder wall are determined.
+    Results from the calculations are stored in the "savedData" folder and presented in figures in the "figs" and "gif" folders.
+    The cylinder wall can be loaded by four loads:
+    <ul>
+        <li>operational temperatures described by internal and external temperatures,</li>
+        <li>LOCA temperatures described by an evolution of internal temperature given in the temperature.xlsx file,</li>
+        <li>LOCA pressure described by an evolution of internal pressure given in the pressure.xlsx file,</li>
+        <li>prestressing of concrete induced by steel tendons.</li>
+    </ul>
+    This tool and methods used in this tool are described in detail in a PhD thesis by Holan [1].
+    <br>
+    <br>
     <i>[1] J. Holan. Analysis of a prestressed-concrete containment vessel exposed to high pressure and temperature. PhD thesis, CTU in Prague, 2023.</i>
+    <br>
+    <br>
+    <b style='color:red;'>
+        This tool should only be used for PRELIMINARY ESTIMATION of temperatures and stresses,
+        and the results provided by the tool should only be used for preliminary conclusions or as a guidance for more complex modelling.
+    </b>
+    When performing a detailed designing of a concrete cylinder structure, complex three-dimensional modelling should be employed.
+    <br>
+    <br>
+    Author: Jakub Holan, CTU in Prague, 2023.
+
 </div>
 </body>
 </html>

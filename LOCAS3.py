@@ -968,8 +968,6 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         Ta = kelvin(Ta)
         hc = clcConvection(L, Ts, Ta)
         hr = emiss*sbc*(Ts+Ta)*(Ts*Ts+Ta*Ta)
-        # print('   hc = ' + str(hc))
-        # print('   hr = ' + str(hr))
         h = hc+hr
         return (1/h)
 
@@ -999,6 +997,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     ####################################################################
 
     print('===== Program started. =====')
+    eel.print_status('Progress: Python function started - loading inputs...')()
 
     # >>>>>>>>>>>>>>>>>>>>>>>>>> INPUTS <<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -1176,9 +1175,11 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
 
 
     # Funkce popisující teplotu uvnitř obálky
-    nazevSouboru = 'ujvAirTepl'+str(Ti0)+'C.xlsx'       # Název souboru
+    # nazevSouboru = 'ujvAirTepl'+str(Ti0)+'C.xlsx'       # Název souboru
+    nazevSouboru = 'temperature.xlsx'       # Název souboru
     if not os.path.isfile(nazevSouboru):
         print('ERROR: File temperature.xlsx is missing in the folder.')
+        eel.print_status('ERROR: File temperature.xlsx is missing in the folder.')()
         return None
     excelData = read_excel(nazevSouboru,header=None)    # Načtení souboru
     vectCas = excelData.iloc[:,0].to_numpy()            # Vytvoření vektoru hodnot osy x (čas)
@@ -1186,9 +1187,11 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     airTemp = interpolate.interp1d(vectCas, vectHodn)   # Vytvoření funkce airTemp(time) popisující teplotu v závislosti na čase
 
     # Funkce popisující tlak uvnitř obálky
-    nazevSouboru = 'ujvAirTlak'+str(Ti0)+'C.xlsx'       # Název souboru
+    # nazevSouboru = 'ujvAirTlak'+str(Ti0)+'C.xlsx'       # Název souboru
+    nazevSouboru = 'pressure.xlsx'       # Název souboru
     if not os.path.isfile(nazevSouboru):
         print('ERROR: File pressure.xlsx is missing in the folder.')
+        eel.print_status('ERROR: File pressure.xlsx is missing in the folder.')()
         return None
     excelData = read_excel(nazevSouboru,header=None)    # Načtení souboru
     vectCas = excelData.iloc[:,0].to_numpy()            # Vytvoření vektoru hodnot osy x (čas)
@@ -1200,6 +1203,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     ############### VÝPOČET ###############
     print('Calculation version: '+lblVersion+'.')
     print('===== Temperature started. =====')
+    eel.print_status('Progress: Temperature calculations starting.')()
     airTempVect = zeros((steps+1))
     tempGradVect = zeros((steps+1))
 
@@ -1281,10 +1285,10 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         matrixT[i+1] = Tnts           # Uložení teplot v čase i+1 do matice teplot
         tempGradVect[i+1] = Tnts[0]-Tnts[-1]
     print('===== Temperature ended. =====')
-    eel.print_status('===== Temperature ended. =====')()
+    eel.print_status('Progress: Temperature calculations ended.')()
 
 
-    eel.print_status('===== Stress started. =====')()
+    eel.print_status('Progress: Stress calculations in progress.')()
     print('===== Stress started. =====')
     matrixStrnF = zeros((steps+1, nNode))
     matrixStrnR = zeros((steps+1, nNode))
@@ -1574,6 +1578,7 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
         vectNormalConcrFrE[i] = normalConcrFrE
         vectBendingConcrFrE[i] = bendingConcrFrE
     print('===== Vnitrni sily ended. =====')
+    eel.print_status('Progress: Stress calculations ended.')()
 
 
 
@@ -1870,41 +1875,22 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     tempConcrMaxTime = array([amax(matTempC[i]) for i in range(steps+1)])
     tempSteelMaxTime = array([amax(matTempS[i]) for i in range(steps+1)])
     plotTempTime(xAxisTimeMax)
-    # plotTempTime(60)
-    # plotTempTime(600)
-
-
 
     # Plot graf časový vývoj napětí od předpětí a přetlaku
     plotNonTempTime(xAxisTimeMax)
-    # plotNonTempTime(60)
-    # plotNonTempTime(600)
-
-
-
-
-
-
 
     # Plot graf časový vývoj teplotního gradientu
     plotGradient(xAxisTimeMax)
-
-
 
     # Plot rozložení napětí od předpětí
     vectStrssPrstrss = matrixStrssPrstrss[0]
     plotPresstressStress()
 
-
-
     # Plot temp distribution in t=0
     plotTempTstart()
 
-
     # Plot heat transfer coeff evolution
     plotSoucinitele()
-
-
 
     # Plot gif FRAME - průběh teplot, přetvoření a napětí ve stěně
     timeStep = 0
@@ -1928,15 +1914,16 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     gifName = str('figs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'/'+lblTemp+'C_'+lblType+'_'+lblTime+'_v'+lblVersion+'_'+'maxInnerTemp'+'.gif')
     gif.save(fakeFrames, gifName, duration=10000)
 
+    print('===== Plot ended. =====')
     eel.print_status('Progress: Plotting of figures ended.')()
 
 
-    # Plot gif - časová evoluce (gif) průběhů teplot ve stěně (frame)
+
+    print('===== GIF started. =====') # Plot gif - časová evoluce (gif) průběhů teplot ve stěně (frame)
     eel.print_status('Progress: Plotting of gif animation started.')()
 
     gifSavePath = 'gifs/'
     Path(gifSavePath).mkdir(parents=True, exist_ok=True)
-
     frames = []
     for i in range(steps+1):
         frameTime = xAxisTime[i]
@@ -1961,11 +1948,11 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
     # gifName = str('gifs/'+lblTemp+'C_'+lblTime+'_v'+lblVersion+'.gif')
     gif.save(frames, gifName, duration=100)
 
-
-
-    print('===== Plot ended. =====')
+    print('===== GIF ended. =====')
     eel.print_status('Progress: Plotting of gif animation ended.')()
-    eel.print_status('Progress: Python calculation completed.')()
+
+
+    eel.print_status('Progress: Python script completed.')()
 
 
 
@@ -1975,14 +1962,14 @@ def hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVn
 
 import eel
 
-# initializing the application
-eel.init("static_web_folder")
+eel.init("static_web_folder") # initializing the application
 
 @eel.expose
 def get_python_result(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVnitrni, sigmaP0, plochaPredp, density0, waterCont, thermExpan, modulusConc, modulusSteel, emiss, Lair, pe, Le, dt1, dt2, dt3, dt4, dt5):
-    eel.print_status('Vypocet spusten.')()
+    eel.print_status('Progress: Python function starting.')()
     hlavni_vypocet(Tstavba, Ti0, Te, duration, concrThick, steelThick, polomerVnitrni, sigmaP0, plochaPredp, density0, waterCont, thermExpan, modulusConc, modulusSteel, emiss, Lair, pe, Le, dt1, dt2, dt3, dt4, dt5)
-    return ('COMPLETED: Calculation has ended. For results see figures and data in folders.')
+    return ('COMPLETED: Calculation has ended. See figures and data in the created folders.')
 
 # starting the application
-eel.start("index.html", size=(1270, 800))
+eel.start("index.html", size=(1290, 900))
+
